@@ -332,6 +332,58 @@ a:not([class]):hover {
   align-items: var(--cluster-vertical-alignment, center);
 }
 
+.switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--space-l));
+  align-items: var(--switcher-vertical-alignment, flex-start);
+}
+
+.switcher > * {
+  flex-grow: 1;
+  flex-basis: calc(
+    (var(--switcher-target-container-width, 40rem) - 100%) * 999
+  );
+}
+
+/* Max 2 items,
+so anything greater than 2 is ful width */
+
+.switcher > :nth-child(n + 3) {
+  flex-basis: 100%;
+}
+
+.flow > * + * {
+  margin-block-start: var(--flow-space, 1em);
+}
+
+.region {
+  padding-block: var(--region-space, var(--space-m));
+  position: relative;
+}
+
+.fifty-fifty {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fifty-fifty > * {
+  flex-grow: 1;
+  flex-basis: var(--min-inline-size, 300px);
+}
+
+.container {
+  width: min(90rem, 100%);
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 5vw, 3rem);
+}
+
+.grid[data-columns="2"] {
+  display: grid;
+  gap: 1rem;
+  grid-auto-rows: 1fr;
+}
+
 /* ==========================================================================
    6. BLOCK COMPONENTS
    ========================================================================== */
@@ -378,4 +430,116 @@ a:not([class]):hover {
 
 .nav a:not(:hover):not([aria-current="page"]) {
   text-decoration: none;
+}
+
+/* ==========================================================================
+   NAVIGATION BAR ENHANCEMENT
+   ========================================================================== */
+
+/* Remove default list padding and margins */
+.site-head .cluster {
+  padding-inline-start: 0;
+  margin-block: 0;
+}
+
+/* Ensure links present nicely as interactive hit targets */
+.nav a {
+  display: inline-block;
+  padding-block: var(--space-xs);
+  color: var(--HotlightColor);
+  font-weight: var(--font-bold);
+  transition: color var(--transition-movement);
+}
+
+/* Active page styling indicator */
+.nav a[aria-current="page"] {
+  color: var(--HighlightColor);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Maintain brand visual contrast */
+.site-head__brand a {
+  color: var(--WindowTextColor);
+  font-weight: var(--font-black);
+  letter-spacing: var(--uppercase-kerning);
+}
+
+.site-head__brand a:hover {
+  color: var(--HotlightColor);
+}
+
+/* profile-card */
+
+/* Profile Image Container & Presentation */
+.profile_card {
+  max-width: 25rem;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  /* border: var(--stroke); */
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.profile_card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Call-to-action Contact Button/Heading */
+.flow h2 a {
+  display: inline-block;
+  padding: var(--space-xs) var(--space-m);
+  background-color: var(--HotlightColor);
+  color: var(--WindowColor);
+  font-size: var(--size-step-1);
+  font-weight: var(--font-bold);
+  text-decoration: none;
+  border-radius: var(--radius-s);
+  transition:
+    transform var(--transition-movement),
+    background-color var(--transition-base);
+}
+
+.flow h2 a:hover {
+  background-color: var(--HighlightColor);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+/* card */
+
+.card {
+  border-radius: var(--radius-m);
+  overflow: hidden;
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(0, 0, 0, 0.23);
+
+  font-family: sans-serif;
+  background: #fff;
+}
+
+.card-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: var(--space-s);
+}
+
+/* --- Minor Button & Text Polishing --- */
+.card-title {
+  color: #222;
+}
+
+.card-text {
+  color: #666;
+  line-height: 1.5;
 }
