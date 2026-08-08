@@ -1,0 +1,381 @@
+/* ==========================================================================
+   1. DESIGN TOKENS & CUSTOM PROPERTIES
+   ========================================================================== */
+
+:root {
+  /* Canvas Background & Base Text */
+  --WindowColor: hsl(0, 0%, 12%);
+  --WindowTextColor: hsl(0, 0%, 100%);
+
+  /* Interactive Links */
+  --HotlightColor: hsl(190, 80%, 62%);
+
+  /* Disabled/Inactive Elements */
+  --GrayTextColor: hsl(0, 0%, 58%);
+
+  /* Selections & Hover states */
+  --HighlightTextColor: hsl(210, 36%, 16%);
+  --HighlightColor: hsl(190, 75%, 65%);
+
+  /* Interactive Controls (Buttons) */
+  --ButtonTextColor: hsl(0, 0%, 100%);
+  --ButtonFaceColor: hsl(0, 0%, 12%);
+
+  /* Focus Indicators & Layout */
+  --FocusRingColor: hsl(0, 75%, 67%);
+  --gutter: 1em;
+
+  /* Space scale (Fluid clamps) */
+  --space-xs: clamp(0.4375rem, 0.42rem + 0.1vw, 0.5rem);
+  --space-s: clamp(0.875rem, 0.83rem + 0.2vw, 1rem);
+  --space-m: clamp(1.3125rem, 1.25rem + 0.29vw, 1.5rem);
+  --space-l: clamp(2.1875rem, 2.09rem + 0.49vw, 2.5rem);
+  --space-xl: clamp(3.0625rem, 2.92rem + 0.69vw, 3.5rem);
+  --space-2xl: clamp(3.5rem, 3.34rem + 0.78vw, 4rem);
+  --space-3xl: clamp(4.375rem, 4.17rem + 0.98vw, 5rem);
+  --space-4xl: clamp(6.5625rem, 6.26rem + 1.47vw, 7.5rem);
+  --space-xs-l: clamp(0.4375rem, -0.23rem + 3.24vw, 2.5rem);
+  --space-m-l: clamp(1.3125rem, 0.93rem + 1.86vw, 2.5rem);
+  --space-2xl-4xl: clamp(3.5rem, 2.21rem + 6.27vw, 7.5rem);
+
+  /* Font size scale (Fluid clamps) */
+  --size-step-000: clamp(0.740625rem, 0.73rem + 0.06vw, 0.78125rem);
+  --size-step-00: clamp(0.833125rem, 0.8rem + 0.16vw, 0.9375rem);
+  --size-step-0: clamp(0.9375rem, 0.88rem + 0.29vw, 1.125rem);
+  --size-step-1: clamp(1.055rem, 0.96rem + 0.46vw, 1.35rem);
+  --size-step-2: clamp(1.18625rem, 1.05rem + 0.68vw, 1.62rem);
+  --size-step-3: clamp(1.335rem, 1.14rem + 0.95vw, 1.94375rem);
+  --size-step-4: clamp(1.501875rem, 1.23rem + 1.3vw, 2.3325rem);
+  --size-step-5: clamp(1.689375rem, 1.33rem + 1.74vw, 2.799375rem);
+  --size-step-6: clamp(1.900625rem, 1.43rem + 2.29vw, 3.359375rem);
+  --size-step-7: clamp(2.138125rem, 1.53rem + 2.97vw, 4.03125rem);
+  --size-step-8: clamp(2.405625rem, 1.62rem + 3.81vw, 4.8375rem);
+  --size-step-9: clamp(2.70625rem, 1.7rem + 4.86vw, 5.805rem);
+  --size-step-10: clamp(3.03125rem, 1.76rem + 6.17vw, 6.965625rem);
+  --size-step-11: clamp(3.78875rem, 1.63rem + 10.45vw, 10.448125rem);
+  --size-step-12: clamp(3.78875rem, 0.36rem + 16.61vw, 14.375rem);
+
+  /* Font properties */
+  --leading-micro: 0.85;
+  --leading-flat: 1;
+  --leading-fine: 1.2;
+  --leading-standard: 1.4;
+  --leading-loose: 1.7;
+  --font-base:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-bold: 700;
+  --font-black: 900;
+
+  /* Layout & Gutter System */
+  --gutter: var(--space-m-l);
+  --gutter-column: var(--gutter);
+  --gutter-row: var(--gutter);
+  --space-gutter: var(--space-m);
+  --space-gutter-s: var(--space-s);
+  --space-gutter-l: var(--space-l);
+  --space-regions: var(--space-xl);
+  --region-space: var(--space-regions);
+
+  /* Transitions & Borders */
+  --transition-base: 250ms ease;
+  --transition-movement: 200ms linear;
+  --transition-fade: 300ms ease;
+  --transition-bounce: 500ms cubic-bezier(0.5, 0.05, 0.2, 1.5);
+  --stroke-width: 1px;
+  --stroke: var(--stroke-width) solid var(--GrayTextColor);
+  --stroke-solid: var(--stroke-width) solid var(--GrayTextColor);
+  --indent-size: var(--space-xs-l);
+
+  /* Radius & Styling */
+  --radius-s: 0.2rem;
+  --radius-m: 0.75rem;
+  --radius-l: 2.5rem;
+  --uppercase-kerning: 0.04ch;
+}
+
+@media (min-width: 600px) {
+  :root {
+    --gutter: var(--space-xl);
+    --small-screen: 0;
+  }
+}
+
+/* Fallback to operating system high-contrast / forced-colors modes */
+@media (forced-colors: active) {
+  :root {
+    --WindowColor: Canvas;
+    --WindowTextColor: CanvasText;
+    --HotlightColor: LinkText;
+    --GrayTextColor: GrayText;
+    --HighlightTextColor: HighlightText;
+    --HighlightColor: Highlight;
+    --ButtonTextColor: ButtonText;
+    --ButtonFaceColor: ButtonFace;
+    --FocusRingColor: Highlight;
+  }
+}
+
+/* ==========================================================================
+   2. GLOBAL RESET & BOX MODEL
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin-block: 0;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+body {
+  min-height: 100vh;
+  line-height: var(--leading-standard, 1.5);
+  background: var(--WindowColor);
+  color: var(--WindowTextColor);
+  font-size: var(--size-step-1, 1rem);
+  font-family: var(--font-base, sans-serif);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: 1.1;
+}
+
+/* ==========================================================================
+   3. BASE TYPOGRAPHY & ELEMENT STYLES
+   ========================================================================== */
+
+:is(h1, h2, h3, h4) {
+  line-height: var(--leading-fine);
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: var(--size-step-6);
+  max-width: 20ch;
+}
+
+h2 {
+  font-size: var(--size-step-5);
+  max-width: 35ch;
+}
+
+h3 {
+  font-size: var(--size-step-4);
+  max-width: 35ch;
+}
+
+:is(h4, h5, h6) {
+  font-size: var(--size-step-3);
+}
+
+:is(h1, h2, h3, h4):where(
+  [class*="text-step-10"],
+  [class*="text-step-11"],
+  [class*="text-step-12"]
+) {
+  line-height: var(--leading-micro);
+  font-weight: var(--font-black);
+}
+
+p {
+  text-wrap: pretty;
+  max-width: 65ch;
+}
+
+img,
+picture {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-style: italic;
+  shape-margin: 1rem;
+}
+
+/*  */
+
+hr {
+  border: none;
+  border-block-start: var(--hr-stroke, var(--stroke));
+  margin-block: var(--flow-space, var(--space-xl));
+}
+
+/*  */
+
+/* ==========================================================================
+   4. BASE LINK STYLES
+ ========================================================================== */
+
+a {
+  color: var(--HotlightColor);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition:
+    color 0.2s ease-in-out,
+    background-color 0.2s ease-in-out,
+    border-color 0.2s ease-in-out;
+}
+
+a:link {
+  color: var(--HotlightColor);
+}
+
+a:visited {
+  /* Slightly muted variation derived from Hotlight */
+  color: color-mix(in srgb, var(--HotlightColor) 75%, #a020f0);
+}
+
+a:hover {
+  /* Lightened state using HighlightColor */
+  color: var(--HighlightColor);
+  text-decoration-thickness: 2px;
+}
+
+a:active {
+  color: hsl(0, 80%, 65%);
+}
+
+/* 2.2 ACCESSIBILITY & FOCUS STATES */
+a:focus-visible {
+  outline: 2px solid var(--FocusRingColor);
+  outline-offset: 3px;
+  background-color: color-mix(in srgb, var(--HotlightColor) 15%, transparent);
+  border-radius: 2px;
+}
+
+a:focus {
+  outline: 2px solid var(--FocusRingColor);
+  outline-offset: 3px;
+}
+
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: currentColor;
+}
+
+a:not([class]):hover {
+  text-underline-offset: 0.2lh;
+}
+
+:is(h1, h2, h3, h4) a:not([class]) {
+  text-decoration-thickness: 0.1ex;
+  text-underline-offset: 0.2ex;
+}
+
+:is(h1, h2, h3, h4) a:not([class]):hover {
+  text-underline-offset: 0.3ex;
+}
+
+/* ==========================================================================
+   5. LAYOUT & COMPOSITION UTILITIES
+   ========================================================================== */
+
+.wrapper {
+  margin-inline: auto;
+  max-width: var(--wrapper-max-width, 1360px);
+  padding-left: var(--gutter);
+  padding-right: var(--gutter);
+  position: relative;
+}
+
+.repel {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: var(--repel-vertical-alignment, center);
+  gap: var(--gutter, var(--space-m));
+}
+
+.repel[data-nowrap] {
+  flex-wrap: nowrap;
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gutter, var(--space-m));
+  justify-content: var(--cluster-horizontal-alignment, flex-start);
+  align-items: var(--cluster-vertical-alignment, center);
+}
+
+/* ==========================================================================
+   6. BLOCK COMPONENTS
+   ========================================================================== */
+
+.site-head {
+  text-transform: uppercase;
+  letter-spacing: var(--uppercase-kerning);
+  line-height: var(--leading-flat);
+  font-size: var(--size-step-00);
+  font-weight: var(--font-bold);
+  padding-block-start: var(--space-m);
+}
+
+.site-head .repel {
+  --gutter: var(--space-m);
+}
+
+.site-head__brand {
+  container-type: inline-size;
+  container-name: site-head-brand;
+
+  /* Min width added to fight against because it's inline-size, being min-content by default */
+  flex-basis: clamp(25ch, 60%, 50rem);
+  flex-grow: 1;
+}
+
+.site-head__brand a:not(:hover) {
+  text-decoration: none;
+}
+
+.site-head hr {
+  --flow-space: var(--space-m);
+  --hr-stroke: var(--stroke-width) solid var(--color-primary);
+}
+
+.nav {
+  --flow-space: var(--space-m);
+  --gutter: var(--space-m) var(--space-l);
+
+  line-height: var(--leading-flat);
+}
+
+/* The default behaviour for links is to have an underline. We remove that only if the item isn't being hovered or is the current active page */
+
+.nav a:not(:hover):not([aria-current="page"]) {
+  text-decoration: none;
+}
