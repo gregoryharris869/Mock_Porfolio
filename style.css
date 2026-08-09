@@ -343,6 +343,10 @@ i:hover {
   align-items: var(--cluster-vertical-alignment, center);
 }
 
+.cluster[data-cluster="center"] {
+  --cluster-horizontal-alignment: center;
+}
+
 .switcher {
   display: flex;
   flex-wrap: wrap;
@@ -412,6 +416,69 @@ so anything greater than 2 is ful width */
 /* ==========================================================================
    6. BLOCK COMPONENTS
    ========================================================================== */
+
+/* Button */
+button {
+  --button-bg: var(--ButtonFaceColor);
+  --button-color: var(--ButtonTextColor);
+  --button-hover-bg: color-mix(in srgb, var(--ButtonFaceColor), #fff 15%);
+  --button-hover-color: var(--ButtonTextColor);
+  --button-border-width: 3px;
+  --button-border-style: solid;
+  --button-border-color: var(--GrayTextColor);
+  --button-radius: 0.5em;
+  --button-font: clamp(0.9375rem, 0.88rem + 0.29vw, 1.125rem);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--button-gap, 0.5em);
+  padding: var(--button-padding, 0.7em 1.2em);
+  background: var(--button-bg);
+  color: var(--button-color);
+
+  border-width: var(--button-border-width);
+  border-style: var(--button-border-style);
+  border-color: var(--button-border-color);
+  border-radius: var(--button-radius);
+
+  text-decoration: none;
+  font-weight: var(--button-font-weight, 700);
+  font-size: var(--button-font);
+  letter-spacing: 0.05ch;
+  font-family: sans-serif;
+  line-height: 1.1;
+
+  cursor: pointer;
+}
+
+.button:hover {
+  background: var(--button-hover-bg);
+  color: var(--button-hover-color);
+}
+
+.button:focus,
+.button:focus-visible {
+  outline-width: var(--button-outline-width, var(--button-border-width));
+  outline-style: var(--button-outline-style, var(--button-border-style));
+  outline-color: var(--button-outline-color, var(--FocusRingColor));
+  outline-offset: var(
+    --button-outline-offset,
+    calc(var(--button-border-width) * 2)
+  );
+}
+
+.button:active {
+  transform: scale(99%);
+}
+
+/* 3.1 BUTTON VARIANTS */
+.button[data-button-variant="primary"] {
+  --button-bg: var(--HighlightColor);
+  --button-color: var(--HighlightTextColor);
+  --button-border-color: var(--HighlightColor);
+  --button-hover-bg: color-mix(in srgb, var(--HighlightColor), #fff 15%);
+  --button-hover-color: var(--HighlightTextColor);
+}
 
 .site-head {
   text-transform: uppercase;
@@ -565,4 +632,60 @@ so anything greater than 2 is ful width */
 .card-text {
   color: #666;
   line-height: 1.5;
+}
+
+/* shield Skills */
+
+[data-shield="shield"] {
+  width: 7rem;
+  height: auto;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  border-radius: var(--radius-m);
+  background: #fff;
+  padding: var(--space-s);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.19),
+    0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+/* resume */
+
+/* Quote styling */
+blockquote {
+  font-style: italic;
+  color: var(--GrayTextColor);
+  /* border-left: 2px solid var(--HotlightColor); */
+  padding-left: var(--space-s);
+}
+
+@media (max-width: 900px) {
+  .visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 0;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    white-space: nowrap;
+  }
+}
+
+/* contact */
+
+.email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--size-step-2);
+  font-weight: var(--font-bold);
+  color: var(--HotlightColor);
+  text-decoration: none;
+}
+
+.email-link:hover {
+  color: var(--HighlightColor);
+  text-decoration: underline;
 }
