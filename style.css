@@ -300,6 +300,17 @@ a:not([class]):hover {
   text-underline-offset: 0.3ex;
 }
 
+i {
+  color: var(--HotlightColor);
+  font-size: var(--size-step-4);
+  transition: color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+i:hover {
+  color: var(--HighlightColor);
+  text-decoration-thickness: 2px;
+}
+
 /* ==========================================================================
    5. LAYOUT & COMPOSITION UTILITIES
    ========================================================================== */
@@ -357,6 +368,18 @@ so anything greater than 2 is ful width */
   margin-block-start: var(--flow-space, 1em);
 }
 
+.flow-space-xl {
+  --flow-space: clamp(3.0625rem, 2.92rem + 0.69vw, 3.5rem);
+}
+
+.flow-space-3xl {
+  --flow-space: clamp(4.375rem, 4.17rem + 0.98vw, 5rem);
+}
+
+.flow-space-2xl-4xl {
+  --flow-space: clamp(3.5rem, 2.21rem + 6.27vw, 7.5rem);
+}
+
 .region {
   padding-block: var(--region-space, var(--space-m));
   position: relative;
@@ -372,16 +395,18 @@ so anything greater than 2 is ful width */
   flex-basis: var(--min-inline-size, 300px);
 }
 
-.container {
-  width: min(90rem, 100%);
-  margin-inline: auto;
-  padding-inline: clamp(1rem, 5vw, 3rem);
+.stack {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
-.grid[data-columns="2"] {
-  display: grid;
-  gap: 1rem;
-  grid-auto-rows: 1fr;
+.stack > * {
+  margin-block: 0;
+}
+
+.stack > * + * {
+  margin-top: var(--space-m);
 }
 
 /* ==========================================================================
@@ -525,7 +550,6 @@ so anything greater than 2 is ful width */
 }
 
 .card-img {
-  width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
@@ -534,7 +558,6 @@ so anything greater than 2 is ful width */
   padding: var(--space-s);
 }
 
-/* --- Minor Button & Text Polishing --- */
 .card-title {
   color: #222;
 }
