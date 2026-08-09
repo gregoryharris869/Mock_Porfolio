@@ -233,34 +233,25 @@ hr {
   margin-block: var(--flow-space, var(--space-xl));
 }
 
-/*  */
-
-/* ==========================================================================
-   4. BASE LINK STYLES
- ========================================================================== */
+/* links */
 
 a {
   color: var(--HotlightColor);
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
+  text-decoration-skip-ink: auto;
   transition:
-    color 0.2s ease-in-out,
-    background-color 0.2s ease-in-out,
-    border-color 0.2s ease-in-out;
-}
-
-a:link {
-  color: var(--HotlightColor);
+    color var(--transition-movement),
+    background-color var(--transition-movement),
+    border-color var(--transition-movement);
 }
 
 a:visited {
-  /* Slightly muted variation derived from Hotlight */
   color: color-mix(in srgb, var(--HotlightColor) 75%, #a020f0);
 }
 
 a:hover {
-  /* Lightened state using HighlightColor */
   color: var(--HighlightColor);
   text-decoration-thickness: 2px;
 }
@@ -269,7 +260,6 @@ a:active {
   color: hsl(0, 80%, 65%);
 }
 
-/* 2.2 ACCESSIBILITY & FOCUS STATES */
 a:focus-visible {
   outline: 2px solid var(--FocusRingColor);
   outline-offset: 3px;
@@ -277,26 +267,13 @@ a:focus-visible {
   border-radius: 2px;
 }
 
-a:focus {
-  outline: 2px solid var(--FocusRingColor);
-  outline-offset: 3px;
-}
-
-a:not([class]) {
-  text-decoration-skip-ink: auto;
-  color: currentColor;
-}
-
-a:not([class]):hover {
-  text-underline-offset: 0.2lh;
-}
-
-:is(h1, h2, h3, h4) a:not([class]) {
+/* Heading Link Overrides */
+:is(h1, h2, h3, h4) a {
   text-decoration-thickness: 0.1ex;
   text-underline-offset: 0.2ex;
 }
 
-:is(h1, h2, h3, h4) a:not([class]):hover {
+:is(h1, h2, h3, h4) a:hover {
   text-underline-offset: 0.3ex;
 }
 
@@ -417,8 +394,9 @@ so anything greater than 2 is ful width */
    6. BLOCK COMPONENTS
    ========================================================================== */
 
-/* Button */
-button {
+/* Button Component (Anchor + Button Neutralization) */
+
+.button {
   --button-bg: var(--ButtonFaceColor);
   --button-color: var(--ButtonTextColor);
   --button-hover-bg: color-mix(in srgb, var(--ButtonFaceColor), #fff 15%);
@@ -451,6 +429,26 @@ button {
   cursor: pointer;
 }
 
+/* Neutralize standard anchor properties for button elements */
+a.button,
+a.button:visited {
+  color: var(--button-color);
+  text-decoration: none;
+}
+
+a.button:hover {
+  background: var(--button-hover-bg);
+  color: var(--button-hover-color);
+  text-decoration: none;
+}
+
+.button svg {
+  height: var(--button-icon-size, 1.2em);
+  height: var(--button-icon-size, 1.2cap);
+  width: auto;
+  flex: none;
+}
+
 .button:hover {
   background: var(--button-hover-bg);
   color: var(--button-hover-color);
@@ -458,6 +456,7 @@ button {
 
 .button:focus,
 .button:focus-visible {
+  background-color: var(--button-bg);
   outline-width: var(--button-outline-width, var(--button-border-width));
   outline-style: var(--button-outline-style, var(--button-border-style));
   outline-color: var(--button-outline-color, var(--FocusRingColor));
@@ -471,12 +470,17 @@ button {
   transform: scale(99%);
 }
 
-/* 3.1 BUTTON VARIANTS */
+/* Primary Variant (Uses System/Design Tokens) */
 .button[data-button-variant="primary"] {
   --button-bg: var(--HighlightColor);
   --button-color: var(--HighlightTextColor);
   --button-border-color: var(--HighlightColor);
-  --button-hover-bg: color-mix(in srgb, var(--HighlightColor), #fff 15%);
+  /* Darken slightly toward text color to avoid washing out light primary colors */
+  --button-hover-bg: color-mix(
+    in srgb,
+    var(--HighlightColor) 85%,
+    var(--HighlightTextColor)
+  );
   --button-hover-color: var(--HighlightTextColor);
 }
 
