@@ -11,26 +11,20 @@
 </head>
 
 <body>
-  <header class="site-head wrapper">
-    <div class="repel">
-      <div class="site-head__brand">
-        <a href="#">
-          Company Logo
-        </a>
+  <header class="site-head">
+    <div class="wrapper">
+      <div class="repel">
+        <div class="site-head__brand">
+          <a href="#">John Doe</a>
+        </div>
+        <nav aria-label="primary" class="nav">
+          <ul class="cluster" role="list">
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#resume">Resume</a></li>
+          </ul>
+        </nav>
       </div>
-      <nav aria-label="primary" class="nav">
-        <ul class="cluster" role="list">
-          <li>
-            <a href="#projects">Projects</a>
-          </li>
-          <li>
-            <a href="#skills">Skills</a>
-          </li>
-          <li>
-            <a href="#resume">Resume</a>
-          </li>
-        </ul>
-      </nav>
     </div>
   </header>
   <!--  profile-card  -->
@@ -277,6 +271,26 @@
       </nav>
     </div>
   </footer>
+  <script>
+    const siteHead = document.querySelector('.site-head');
+    let ticking = false;
+
+    function updateHeader() {
+      if (window.scrollY > 50) {
+        siteHead.classList.add('scrolled');
+      } else {
+        siteHead.classList.remove('scrolled');
+      }
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateHeader);
+        ticking = true;
+      }
+    });
+  </script>
 </body>
 
 </html>

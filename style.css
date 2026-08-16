@@ -131,6 +131,9 @@ html {
   -moz-text-size-adjust: none;
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
+  /* Offset scroll position so sticky header doesn't cover content */
+  scroll-padding-top: var(--space-3xl);
+  scroll-behavior: smooth;
 }
 
 body,
@@ -366,6 +369,10 @@ so anything greater than 2 is ful width */
   position: relative;
 }
 
+.region-space-2xl-4xl {
+  --region-space: clamp(3.5rem, 2.21rem + 6.27vw, 7.5rem);
+}
+
 .fifty-fifty {
   display: flex;
   flex-wrap: wrap;
@@ -485,12 +492,25 @@ a.button:hover {
 }
 
 .site-head {
-  text-transform: uppercase;
-  letter-spacing: var(--uppercase-kerning);
-  line-height: var(--leading-flat);
-  font-size: var(--size-step-00);
-  font-weight: var(--font-bold);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
   padding-block-start: var(--space-m);
+  transition:
+    background-color 300ms ease,
+    padding 300ms ease,
+    box-shadow 300ms ease,
+    backdrop-filter 300ms ease;
+}
+
+/* Full Bleed Scrolled State */
+.site-head.scrolled {
+  padding-block: var(--space-s);
+  background-color: color-mix(in srgb, var(--WindowColor) 85%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .site-head .repel {
@@ -500,7 +520,7 @@ a.button:hover {
 .site-head__brand {
   container-type: inline-size;
   container-name: site-head-brand;
-
+  font-size: var(--size-step-3);
   /* Min width added to fight against because it's inline-size, being min-content by default */
   flex-basis: clamp(25ch, 60%, 50rem);
   flex-grow: 1;
