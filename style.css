@@ -115,6 +115,11 @@
     --ButtonFaceColor: ButtonFace;
     --FocusRingColor: Highlight;
   }
+
+  .button,
+  .rolodex__item {
+    forced-color-adjust: none; /* Preserves contrast tokens inside custom-themed components */
+  }
 }
 
 /* ==========================================================================
@@ -136,16 +141,7 @@ html {
   scroll-behavior: smooth;
 }
 
-body,
-h1,
-h2,
-h3,
-h4,
-p,
-figure,
-blockquote,
-dl,
-dd {
+:where(body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd) {
   margin-block: 0;
 }
 
@@ -175,12 +171,18 @@ label {
   line-height: 1.1;
 }
 
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
 /* ==========================================================================
    3. BASE TYPOGRAPHY & ELEMENT STYLES
    ========================================================================== */
 
 :is(h1, h2, h3, h4) {
-  line-height: var(--leading-fine);
   text-wrap: balance;
 }
 
@@ -195,21 +197,12 @@ h2 {
 }
 
 h3 {
-  font-size: var(--size-step-4);
+  font-size: var(--size-step-3);
   max-width: 35ch;
 }
 
 :is(h4, h5, h6) {
-  font-size: var(--size-step-3);
-}
-
-:is(h1, h2, h3, h4):where(
-  [class*="text-step-10"],
-  [class*="text-step-11"],
-  [class*="text-step-12"]
-) {
-  line-height: var(--leading-micro);
-  font-weight: var(--font-black);
+  font-size: var(--size-step-4);
 }
 
 p {
