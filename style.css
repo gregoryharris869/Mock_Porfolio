@@ -48,6 +48,7 @@
   --space-2xl-3xl: clamp(4.5rem, 3.2727rem + 5.4545vw, 7.5rem);
 
   /* Custom pairs */
+  --space-xs-l: clamp(0.875rem, 0.3864rem + 2.1591vw, 2.5rem);
   --space-s-l: clamp(1.125rem, 0.5625rem + 2.5vw, 2.5rem);
 
   /* Font size scale (Fluid clamps) */
@@ -139,12 +140,20 @@
 }
 
 html {
-  -moz-text-size-adjust: none;
+  font-family: system-ui, sans-serif;
+  line-height: 1.6;
   -webkit-text-size-adjust: none;
+  -moz-text-size-adjust: none;
   text-size-adjust: none;
+  scroll-padding-block-start: 5rem;
   /* Offset scroll position so sticky header doesn't cover content */
   scroll-padding-top: var(--space-3xl);
-  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 :where(body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd) {
@@ -161,7 +170,7 @@ body {
   line-height: var(--leading-standard, 1.5);
   background: var(--WindowColor);
   color: var(--WindowTextColor);
-  font-size: var(--size-step-1, 1rem);
+  font-size: var(--size-step-0, 1rem);
   font-family: var(--font-base, sans-serif);
   -webkit-font-smoothing: antialiased;
   margin: 0;
@@ -677,8 +686,8 @@ a.button:hover {
 /* Quote styling */
 blockquote {
   font-style: italic;
-  color: var(--GrayTextColor);
-  /* border-left: 2px solid var(--HotlightColor); */
+  margin-inline: 0;
+  color: var(--WindowTextColor);
   padding-left: var(--space-s);
 }
 
